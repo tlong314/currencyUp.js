@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en-us">
+<head>
+<meta charset="utf-8" />
+<title></title>
+<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, minimal-ui' />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<style>
+
+input {
+	text-align: right;
+}
+</style>
+</head>
+<body>
+<input type="text" id="curTest" class="currencyInputs" />
+<input type="text" id="curTest2" class="currencyInputs" />
+<script src="currencyUp.js"></script>
+<script>
+
+ var options = {
+	dollarSign: true,
+	onblur: true,
+	initial: null,
+	element: null
+	},
+	cInput1,
+	cInput2;
+
+onload = function(){
+	var options = {
+		dollarSign: true,
+		onblur: true,
+		initial: "$0.00",
+		element: document.getElementById("curTest")
+	};
+
+	cInput1 = new currencyUp(options);
+	
+	options.initial = 22239878902735;
+	options.element = document.getElementById("curTest2");
+	cInput2 = new currencyUp(options);
+ };
+ 
+</script>
+</body>
+</html>

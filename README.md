@@ -25,7 +25,7 @@ dollarSign {boolean} - Decides whether the formatted currency value should have 
 
 onblur {boolean} - If true, only formats value to currency onblur. If false, maintains format while being edited (not recommended). Default is true.
 
-initial {string | number | undefined} - If present, sets an initial value for the referenced element. Default is undefined.
+initial {string | number | undefined} - If present (and set to a number or string), sets an initial value for the referenced element. Default is undefined.
 
 ## License
 

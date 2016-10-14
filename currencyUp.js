@@ -1,21 +1,24 @@
 /**
- *	@title currencyUp.js
+ * @title currencyUp.js
  * @description Formats US currency in form fields.
  * @author Tim S. Long
  * @modified October 11, 2016
  * @license MIT
  */
-;var currencyUp = (function(){
+;var currencyUp = (function(global, undefined){
 	var options = {
 		dollarSign: true,
 		onblur: true,
-		initial: "",
+		initial: undefined,
 		element: null
 	};
 
-	// Initiate the element.
+	/*
+	 * @description Initiate the element.
+	 * @param {Object} opts - constructor options. See documentation.
+	 */
 	var currencyUp = function(opts){
-		if(this === window) {
+		if(this === global) {
 			return new currencyUp(opts);
 		}
 
@@ -29,10 +32,10 @@
 			return;
 		}
 
-		if(typeof options.initial === "string" && options.initial !== "") {
-			options.element.value = (options.dollarSign ? "$" : "") + setCurrency(parseFloat(options.initial.replace(/[^0-9.\-]/g, "") || 0, 10));
+		if(typeof options.initial === "string") {
+			options.element.value = (options.dollarSign ? "$" : "") + formatToCurrency(parseFloat(options.initial.replace(/[^0-9.\-]/g, "") || 0, 10));
 		} else if(typeof options.initial === "number") {
-			options.element.value = (options.dollarSign ? "$" : "") + setCurrency(options.initial);
+			options.element.value = (options.dollarSign ? "$" : "") + formatToCurrency(options.initial);
 		}
 
 		if(options.onblur) {
@@ -40,28 +43,32 @@
 			options.element.addEventListener("blur", blurCurrency, false);
 		}
 		
-		options.element.addEventListener("keyup", keyupCurrency, false);
+		options.element.addEventListener("keyup", keyUpCurrency, false);
 	}; // End currencyUp() constructor.
 	
+	// Set value to raw floating point number when input field gains focus.
 	var focusCurrency = function(){
 		this.value = this.value.replace(/[^0-9.\-]/g, "");
 	};
 
+	// Set value to currency format when input field loses focus.
 	var blurCurrency = function(){
-		this.value = (options.dollarSign ? "$" : "") + setCurrency(this.value.replace(/[^0-9.\-]/g, ""));
+		this.value = (options.dollarSign ? "$" : "") + formatToCurrency(this.value.replace(/[^0-9.\-]/g, ""));
 	};
 
-	var keyupCurrency = function(){
+	// If onblur option is on, removes all non-acceptable values from input field (only keeps numerical digits, periods, and negative signs).
+	// If onblur option is false, does this and formats to money (not recommended, as this moves the cursor).
+	var keyUpCurrency = function(){
 		if(options.onblur) {
 			this.value = this.value.replace(/[^0-9.\-]/g, "");
 		} else {
 			var val = parseFloat(this.value.replace(/[^0-9.\-]/g, "") || 0, 10);
-			//this.value = (options.dollarSign ? "$" : "") + setCurrency(val); // Note the cursor moving to the end of the input. UI fail.
+			this.value = (options.dollarSign ? "$" : "") + formatToCurrency(val); // Note the cursor moving to the end of the input. UI fail.
 		}
-	};
+	}; // End keyUpCurrency
 
-	// Format to standard US currency.
-	var setCurrency = function(num){
+	// Format number to standard US currency.
+	var formatToCurrency = function(num){
 		if(!num) {
 			return "0.00";
 		}
@@ -79,8 +86,23 @@
 		}
 		
 		return dollarsRev.reverse().join("") + "." + cents;
+	}; // End formatToCurrency()
+	
+	// Get a currency-formatted value of the field input's current value (for instance, while it has focus).
+	currencyUp.prototype.getFormattedValue = function() {
+		return (options.dollarSign ? "$" : "") + formatToCurrency(this.value);
+	};
+	
+	// Get an unformatted value of the field input's current value (for instance while it does not have focus).
+	currencyUp.prototype.getUnFormattedValue = function() {
+		return this.value.replace(/[^0-9.\-]/g, "");
+	};
+
+	// Get the raw numeric value of the field input's current value (for instance while it does not have focus).
+	currencyUp.prototype.getNumberValue = function() {
+		return parseFloat(this.value.replace(/[^0-9.\-]/g, ""), 10);
 	};
 	
 	// Expose the constructor.
 	return currencyUp;
-}()); // End currencyUp()
+}(window)); // End currencyUp()

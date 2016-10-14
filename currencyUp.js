@@ -9,7 +9,7 @@
 	var options = {
 		dollarSign: true,
 		onblur: true,
-		initial: null,
+		initial: "",
 		element: null
 	};
 
@@ -29,7 +29,7 @@
 			return;
 		}
 
-		if(typeof options.initial === "string") {
+		if(typeof options.initial === "string" && options.initial !== "") {
 			options.element.value = (options.dollarSign ? "$" : "") + setCurrency(parseFloat(options.initial.replace(/[^0-9.\-]/g, "") || 0, 10));
 		} else if(typeof options.initial === "number") {
 			options.element.value = (options.dollarSign ? "$" : "") + setCurrency(options.initial);

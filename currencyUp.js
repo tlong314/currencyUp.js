@@ -13,7 +13,7 @@
 		element: null
 	};
 
-	/*
+	/**
 	 * @description Initiate the element.
 	 * @param {Object} opts - constructor options. See documentation.
 	 */
@@ -85,7 +85,7 @@
 			i++;
 		}
 		
-		return dollarsRev.reverse().join("") + "." + cents;
+		return (neg ? "-" : "") + dollarsRev.reverse().join("") + "." + cents;
 	}; // End formatToCurrency()
 	
 	// Get a currency-formatted value of the field input's current value (for instance, while it has focus).

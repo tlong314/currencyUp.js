@@ -2,7 +2,7 @@
  * @title currencyUp.js
  * @description Formats US currency in form fields.
  * @author Tim S. Long
- * @modified October 11, 2016
+ * @modified June 10, 2017
  * @license MIT
  */
 ;var currencyUp = (function(global, undefined){

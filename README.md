@@ -1,10 +1,10 @@
-# currencyUp.js
+# upcurrency.js
 
 A tiny library to keep specific field inputs in U.S. currency format.
 
 ## Usage
 
-A currencyUp object is created by invoking the currencyUp constructor. The argument in this call is an object of key-value pairs, which much contain at least a reference to the field value (generally an input[type="text"] element). See Options below.
+An UpCurrency object is created by invoking the UpCurrency constructor. The argument in this call is an object of key-value pairs, which much contain at least a reference to the field value (generally an input[type="text"] element). See Options below.
 
 Example:
 
@@ -14,7 +14,7 @@ var options = {
   dollarSign: false
 };
 
-var cInput = new currencyUp(options);
+var cInput = new UpCurrency(options);
 ```
 
 ## Options
@@ -29,4 +29,4 @@ initial {string | number | undefined} - If present (and set to a number or strin
 
 ## License
 
-currencyUp.js is available for use under the MIT License.
+upcurrency.js is available for use under the MIT License.

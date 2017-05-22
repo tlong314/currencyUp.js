@@ -1,4 +1,4 @@
-# upcurrency.js
+# UpCurrency
 
 A tiny library to keep specific field inputs in U.S. currency format.
 
@@ -29,4 +29,4 @@ initial {string | number | undefined} - If present (and set to a number or strin
 
 ## License
 
-upcurrency.js is available for use under the MIT License.
+UpCurrency is available for use under the MIT License.
